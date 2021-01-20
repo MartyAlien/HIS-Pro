@@ -1,0 +1,26 @@
+GET http://localhost:8080/tyj/doctor/getDoctorList
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/tyj/doctor/getDoctorList
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/tyj/doctor/getDoctorList
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/tyj/
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-12-21T091120.200.html
+
+###
+
