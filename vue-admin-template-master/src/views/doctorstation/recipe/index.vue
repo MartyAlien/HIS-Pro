@@ -1,84 +1,97 @@
 <template>
   <div>
-    <el-card shadow="hover" style="width:40%;margin:20px;float:left">
-      <el-table
-        :data="sarsBean.today.filter(data=>data.value>0)"
-        :default-sort = "{prop: 'value', order: 'descending'}"
-		show-summary
-		:summary-method="getSummaries"
-        max-height="350"
-		row-key="id"
-		border
-		lazy
-		:tree-props="{children: 'children', hasChildren: 'hasChildren'}">
-        <el-table-column
-          type="index"
-          width="100"
-          label="序号">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="今日国内新增病例地区">
-        </el-table-column>
-        <el-table-column
-          prop="value"
-          label="新增确诊人数">
-          <template slot-scope="scope">
-            <el-tag
-              :type='scope.row.value>100?"danger":scope.row.value===0?"success":"warning"'
-              disable-transitions>{{scope.row.value|showNum}}</el-tag>
-          </template>
-       </el-table-column>
-	   <el-table-column
-          prop="lastUpdateTime"
-          label="截止日期">
-       </el-table-column>
-      </el-table>
-    </el-card>
-
-    <el-card shadow="hover" style="width:55%;margin-top:20px;margin-right:20px;float:right">
-    	<div id="main" style="height:720px;"></div>
-		<div align="right">
-			<el-button type="success" @click="updateMap(0)" round>国内累计</el-button>
-			<el-button type="success" @click="updateMap(1)" round>国内新增</el-button>
-			<el-button type="success" @click="updateMap(2)" round>全球累计</el-button>
-			<el-button type="success" @click="updateMap(3)" round>全球新增</el-button>
-		</div>
-	</el-card>
-
-	<el-card shadow="hover" style="width:40%;margin:20px;">
-      <el-table
-        :data="sarsBean.g_today.filter(data => data.value>0)"
-        :default-sort = "{prop: 'value', order: 'descending'}"
-        max-height="350"
-		row-key="id"
-		border
-		lazy
-		:tree-props="{children: 'children', hasChildren: 'hasChildren'}">
-        <el-table-column
-          type="index"
-          width="100"
-          label="序号">
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          label="今日全球新增病例地区">
-        </el-table-column>
-        <el-table-column
-          prop="value"
-          label="新增确诊人数">
-          <template slot-scope="scope">
-            <el-tag
-              :type='scope.row.value>100?"danger":scope.row.value===0?"success":"warning"'
-              disable-transitions>{{scope.row.value|showNum}}</el-tag>
-          </template>
-       </el-table-column>
-	   <el-table-column
-          prop="lastUpdateTime"
-          label="截止日期">
-       </el-table-column>
-      </el-table>
-    </el-card>
+	<el-row :gutter="10" style="padding:10px">
+		<el-col :xl="12" :md="12" :xs="24">
+			<el-row>
+				<el-col>
+					<el-card shadow="hover" style="border-radius:10px">
+						<el-table
+							:data="sarsBean.today.filter(data=>data.value>0)"
+							:default-sort = "{prop: 'value', order: 'descending'}"
+							show-summary
+							:summary-method="getSummaries"
+							max-height="350"
+							row-key="id"
+							border
+							lazy
+							:tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+							<el-table-column
+								type="index"
+								width="100"
+								label="序号">
+								</el-table-column>
+								<el-table-column
+								prop="name"
+								label="今日国内新增病例地区">
+								</el-table-column>
+								<el-table-column
+								prop="value"
+								label="新增确诊人数">
+								<template slot-scope="scope">
+									<el-tag
+									:type='scope.row.value>100?"danger":scope.row.value===0?"success":"warning"'
+									disable-transitions>{{scope.row.value|showNum}}</el-tag>
+								</template>
+							</el-table-column>
+							<el-table-column
+								prop="lastUpdateTime"
+								label="截止日期">
+							</el-table-column>
+						</el-table>
+						</el-card>
+				</el-col>
+			</el-row>
+			<el-row style="margin-top:20px">
+				<el-col>
+					<el-card shadow="hover" style="border-radius:10px">
+						<el-table
+							:data="sarsBean.g_today.filter(data => data.value>0)"
+							:default-sort = "{prop: 'value', order: 'descending'}"
+							max-height="350"
+							row-key="id"
+							border
+							lazy
+							:tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+								<el-table-column
+								type="index"
+								width="100"
+								label="序号">
+								</el-table-column>
+								<el-table-column
+								prop="name"
+								label="今日全球新增病例地区">
+								</el-table-column>
+								<el-table-column
+								prop="value"
+								label="新增确诊人数">
+								<template slot-scope="scope">
+									<el-tag
+									:type='scope.row.value>100?"danger":scope.row.value===0?"success":"warning"'
+									disable-transitions>{{scope.row.value|showNum}}</el-tag>
+								</template>
+							</el-table-column>
+							<el-table-column
+								prop="lastUpdateTime"
+								label="截止日期">
+							</el-table-column>
+						</el-table>
+					</el-card>
+				</el-col>
+			</el-row>
+		</el-col>
+		<el-col :xl="12" :md="12" :xs="24">
+			<el-card shadow="hover" style="border-radius:10px">
+				<div id="main" style="height:720px;"></div>
+				<el-row :gutter="10">
+					<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><el-button type="success" @click="updateMap(0)" round>国内累计</el-button></el-col>
+					<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><el-button type="success" @click="updateMap(1)" round>国内新增</el-button></el-col>
+					<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><el-button type="success" @click="updateMap(2)" round>全球累计</el-button></el-col>
+					<el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6"><el-button type="success" @click="updateMap(3)" round>全球新增</el-button></el-col>
+				</el-row>
+			</el-card>
+		</el-col>
+	</el-row>
+	
   </div>
 </template>
 
